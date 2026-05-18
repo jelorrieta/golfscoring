@@ -103,10 +103,6 @@ async function syncFiltersAndInit() {
 
   document.getElementById("category").value = "";
 
-  await loadCategoriesByTournament(
-    currentTournamentId
-  );
-
   currentSortBy = getDefaultSortBy();
 
   // SOLO AQUÍ RPC
