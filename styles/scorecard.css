@@ -1,0 +1,409 @@
+/* =============================
+   SCORECARDS
+============================= */
+
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 50px;
+  gap: 1px;
+}
+
+.row-scorecard {
+  display: grid;
+  grid-template-columns: 100px 2fr 2fr;
+  gap: 1px;
+}
+
+.row input {
+  padding: 6px;
+}
+
+#scorecard {
+  background: var(--surface);
+  padding: 15px;
+  border-radius: 14px;
+  overflow-x: auto;
+  box-shadow:
+    0 4px 20px rgba(0,0,0);
+  text-align: center;
+  color: var(--text);
+}
+
+/* =============================
+   WRAPPER
+============================= */
+
+.scorecard-wrapper {
+  border-radius:px;
+  background:rgba(255,255,255);
+  width: 100%;
+  overflow-x: auto;
+  font-size: 14px;
+}
+
+/* =============================
+   TABLA SCORECARD
+============================= */
+
+.scorecard-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%
+  border: solid rgba(0,0,0) 1.5px;
+  overflow: visible;
+}
+
+/* =============================
+   CELDAS BASE
+============================= */
+
+.scorecard-table td,
+.scorecard-table th {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+}
+
+.scorecard-table tr:nth-child(even) {
+  background-color: white !important;
+}
+
+.scorecard td:hover{
+  background:#f1f5f9;
+}
+
+.scorecard-table th {
+  background: #dddddd;
+  color:#000000;
+  font-weight:700;
+  top: 0px;
+  border: black 1px;
+}
+
+
+/* =============================
+   LABELS
+============================= */
+
+.row-label {
+  position: sticky;
+  left: 0;
+  z-index: 8;
+  width: 140px !important;
+  min-width: 120px !important;
+  padding-left: 10px !important;
+  color: white;
+  text-align: left !important;
+  font-size: 12px;
+  white-space: nowrap;
+  height: 24px !important;
+}
+
+.hole_label {
+  background: rgb(0 0 45) !important;
+  color: white !important;
+}
+
+#par-row-label{
+  background: #777777 !important;
+  color:white !important;
+}
+
+/* =============================
+   CELDAS SCORE
+============================= */
+
+.cell,
+.cell_t {
+  position: relative;
+  font-size: 14px;
+  font-weight: normal;
+  background: var(--surface);
+  color: var(--text-soft);
+  transition:
+    background .15s ease,
+    transform .08s ease;
+}
+
+.cell:hover {
+  background: rgba(0,148,49,.08);
+}
+
+/* TOTALES */
+
+.cell_t {
+  font-weight: bold;
+  background: var(--total-bg);
+  color: black;
+  width: 50px !important;
+}
+
+.cell_tot {
+  font-weight: bold;
+  font-size: 13px;
+  background: rgb(4 44 80);
+  color: white;
+  width: 50px !important;
+}
+
+/* =============================
+   HEADER HOYOS
+============================= */
+
+.hole_num {
+  font-size: 12px;
+  background: rgb(4 54 80);
+  color: white;
+  height: 30px !important;
+}
+
+.hole_num_t {
+  position: relative;
+  font-size: 11px;
+  background: rgb(0 0 45);
+  color: white;
+  text-transform: none;
+  font-weight: bold;
+  height: 20px !important;
+  overflow: visible !important;
+  border-bottom: solid rgb(0 0 45) 1px !important;
+  z-index: 5;
+  width: 45px;
+}
+
+.ventaja {
+  font-size: 11px;
+  color: #ffffff;
+  height: 25px !important;
+  background: #005c8c;
+}
+
+.ventaja_label {
+  background: #040446 !important;
+  color: white !important;
+}
+
+
+
+/* =============================
+   PAR
+============================= */
+
+.par {
+  font-size: 11px;
+  background: #eaeaea;
+  color: #444444;
+  height: 36px;
+  padding-top: 6px;
+  vertical-align: top;
+  border-bottom: solid 1px grey !important;
+}
+
+.par-strokes {
+  font-size: 10px;
+  line-height: 1;
+  color: darkblue;
+  letter-spacing: 2px;
+  min-height: 9px;
+  margin-right: -2px;
+  margin-top: -6px;
+}
+
+.par-value {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;  
+}
+
+#hole_par_out, #hole_par_in{
+  background: #c4c4c4;
+}
+
+#hole_par_total{
+  background: #444444;
+  color: white;
+}
+
+#hole_handicap_out, #hole_handicap_in ,#hole_handicap_total{
+background: rgb(0 0 45);
+  color: white;
+}
+/* =============================
+   INPUTS
+============================= */
+
+.score-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  background: transparent;
+}
+
+.score-input:focus {
+  outline: none;
+  background: #e9f7ef;
+}
+
+/* =============================
+   HOVER
+============================= */
+
+.cell:hover {
+  background: #f9f9f9;
+}
+
+/* =============================
+   SCORE MARKERS
+============================= */
+
+/* BIRDIE */
+
+.birdie::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #d32f2f;
+  border-radius: 50%;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+/* EAGLE */
+
+.eagle::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px double #d32f2f;
+  border-radius: 50%;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+/* BOGEY */
+
+.bogey::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid blue;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* DOUBLE BOGEY */
+
+.double-bogey::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px double #000435;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* TRIPLE BOGEY */
+
+.triple-bogey::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px double orange;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+// STABLEFORD
+
+.sf-0{
+  background: transparent;
+}
+.sf-1{
+  background: rgba(76,175,80,.06);
+}
+.sf-2{
+  background: rgba(76,175,80,.14);
+}
+.sf-3{
+  background: rgba(76,175,80,.24);
+}
+.sf-4{
+  background: rgba(0,200,83,.34);
+}
+.sf-5{
+  background: rgba(0,112,192,.40);
+}
+
+@media (max-width: 768px) and (orientation: portrait){
+  .scorecard-table td,
+  .scorecard-table th {
+    height:30px;
+  }
+  .row-label {
+    width:22.5vw !important;
+    letter-spacing:-0.06rem;
+    padding-left:5px !important;
+    height: 7.5vw;
+    font-size:10px;
+  }
+  .cell, .cell_t, .hole_num, ventaja{
+    width:7.5vw !important;
+    height: 7.5vw !important;
+    font-size: 12px;
+  }
+  .par {
+    height: 7.5vw !important;
+  }
+  .birdie::after {
+    width: 24px;
+    height: 24px;
+    border-width: 1.5px;
+  }
+  .eagle::after {
+    width: 26px;
+    height: 26px;
+    border-width: 4px;
+  }
+  .bogey::after {
+    width: 20px;
+    height: 20px;
+    border-width: 1.5px;
+  }
+  .double-bogey::after {
+    width: 18px;
+    height: 18px;
+    border-width: 3px;
+  }
+  .triple-bogey::after {
+    width: 18px;
+    height: 18px;
+    border-width: 3px;
+  }
+}

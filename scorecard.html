@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scorecard</title>
+  <link rel="stylesheet" href="styles/styles.css?v=1">
+  <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Scorecard por Jugador</h2>
+    <form id="scoreForm">
+      <div class="row-scorecard"><label class="etiq">Torneo</label><select id="tournament" class="sel"></select></div>
+      <div class="row-scorecard"><label class= "etiq">Ronda</label><select id="round" value=1 class="sel"></select></div>
+      <div class="row-scorecard"><label  class= "etiq">Jugador</label><select id="player" class="sel"></select></div>
+      </form>
+    <div id="scorecard"></div>
+  </div>
+
+  <script type="module" src="js/scorecard.js?v=17"></script>
+  
+</body>

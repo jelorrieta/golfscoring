@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jugadores</title>
+  <link rel="stylesheet" href="styles/players.css">
+</head>
+<body>
+  <div class="container">
+  <h1>Jugadores</h1>
+
+  <!-- FORMULARIO -->
+  <div class="card">
+    <h2>Agregar jugador</h2>
+    <div class="form-row">
+      <input type="text" placeholder="Nombre jugador" id="name">
+      <input type="number" placeholder="HCP" id="hcp">
+      <select id="category">
+        <option value="">Seleccionar categoría</option>
+      </select>
+      <button id="addBtn">Agregar</button>
+    </div>
+  </div>
+
+  <!-- LISTADO -->
+  <div class="card">
+    <h2>Listado</h2>
+    <table class="players-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>HCP</th>
+          <th>Categoría</th>
+        </tr>
+      </thead>
+      <tbody id="playersTableBody">
+        <!-- JS llena esto -->
+      </tbody>
+    </table>
+  </div>
+</div>
+  <div id="players-list" class="container"></div>
+  <script type="module" src="js/players.js"></script>
+</body>

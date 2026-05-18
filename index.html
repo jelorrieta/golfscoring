@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
+  <link rel="stylesheet" href="styles/leaderboard.css?v5">
+  <link rel="stylesheet" href="styles/scorecard.css">
+  <link rel="stylesheet" href="styles/graficos.css?v3">
+  <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+
+<body>
+  <div class="container">
+    <div class="top-row-form">
+      <label class="top-etiq">Torneo</label>
+      <select id="tournament" class="top-sel"></select>
+      <div class="selectores">
+        <button id="btn-leaderboard" class="btn-selector">
+        <img src="images/rank.png" alt="Leaderboard">
+      </button>
+      <button id="btn-dashboard" class="btn-selector">
+        <img src="images/stat.png" alt="Estadísticas">
+      </button>
+      </div>
+    </div>
+    <div class="header-container">
+    <div class="header">
+      <div id="informe" class="titulo"><span>LEADERBOARD</span></div>
+      <div class="titulo2"><span>TORNEO</span><span id="torneo"></span></div>
+      <div class="bajada">CLUB DE GOLF LOMAS DE LA DEHESA</div>
+    </div>
+    </div>
+    <div id="category-row-selector" class="row-form"><label class= "etiq">Categoría</label><select id="category" class="sel"></select></div>
+    <div id="leaderboard"></div>
+    <div id="dashboard" hidden></div>
+    </div>
+    <footer>
+      <div style="text-align:center;">2026 golfscoring.cl — Plataforma de scoring de golf en tiempo real<br>Sitio Web en Fase Piloto</div>
+    </footer>
+  
+    <script type="module" src="js/app.js?v=16"></script>
+    <script type="module" src="js/dashboard.js?v=20"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+</body>

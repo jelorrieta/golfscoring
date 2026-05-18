@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scores</title>
+  <link rel="icon" type="image/jpg" href="/images/pelotagolf.jpg">
+  <link rel="stylesheet" href="styles/scores.css?v=3">
+</head>
+<body>
+  <div class="login-box">
+    <div>Scorer Login</div>
+    <input
+      type="text"
+      id="scorer-username"
+      placeholder="Usuario"
+      autocomplete="off"
+    >
+    <input
+      type="password"
+      id="scorer-password"
+      placeholder="Contraseña"
+    >
+    <button onclick="ulogin()" style="background: darkgreen; color:white;">Ingresar</button>
+    <div id="login-message"></div>
+    <div class="username">Usuario actual: </div>
+    <div id="username" class="username"></div>
+    <button onclick="login()" class="GH">GH Login</button>
+  </div>
+  
+  <div>
+  <h2>Formulario de Ingreso de Scores</h2>
+  <!-- Selectores -->
+  <label>Torneo:</label>
+  <select id="tournamentSelect"></select>
+
+  <label style="display: none;">Ronda:</label>
+  <select id="roundSelect" style="display: none;"></select>
+  <button id="loadTable">Recargar 🔄</button>
+  <button id="saveScores">Guardar Scores ⇧ </button>
+
+  <br><br>
+
+  <!-- Tabla -->
+  <table id="scoresTable" border="1" class="score-table">
+    <thead id="tableHead"></thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <br>
+
+</div>
+<script type="module" src="js/scores.js?v=17"></script>
+</body>

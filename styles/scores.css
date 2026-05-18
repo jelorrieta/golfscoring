@@ -1,0 +1,245 @@
+/* =============================
+   🌿 VARIABLES (tema elegante)
+============================= */
+:root {
+  --bg: #0f172a;
+  --card: #111827;
+  --accent: #22c55e;
+  --accent-soft: #4ade80;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: #1f2933;
+  --danger: #ef4444;
+  --shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* =============================
+   BASE
+============================= */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #FFFFFF;
+  color: #000000;
+  margin: 0;
+  padding: 20px;
+}
+
+/* =============================
+   CONTENEDOR
+============================= */
+.score-container {
+  max-width: 1000px;
+  margin: auto;
+  background: var(--card);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: var(--shadow);
+}
+
+/* =============================
+   HEADER
+============================= */
+.score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.score-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.score-subtitle {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* =============================
+   TABLA
+============================= */
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* 🔥 clave para respetar anchos */
+}
+
+/* 🔹 Primera columna (Jugador) */
+.score-table th:first-child,
+.score-table td:first-child {
+  width: 200px;
+  text-align: left;
+  padding-left: 8px;
+}
+
+/* 🔹 Columnas de hoyos */
+.score-table th:not(:first-child),
+.score-table td:not(:first-child) {
+  width: 20px;
+}
+
+/* 🔹 Header */
+.score-table th {
+  text-align: center;
+  font-weight: 500;
+  color: #ffffff;
+  padding: 4px 2px; /* 🔥 más compacto */
+  line-height: 1.2;
+  background: #38612f;
+}
+
+/* 🔹 Celdas */
+.score-table td {
+  text-align: center;
+  padding: 2px; /* 🔥 reduce alto */
+  line-height: 1.2;
+}
+
+/* 🔹 Inputs */
+.score-table input {
+  width: 100%;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  padding: 2px 0;
+  background: transparent;
+}
+
+/* 🔹 Opcional: evitar que nombres largos rompan layout */
+.score-table td:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.total{
+   background: #22aa22;
+   color:white;
+}
+
+.sub_total{
+   background: #aaeeaa;
+}
+
+/* =============================
+   INPUT DE SCORE
+============================= */
+.score-input {
+  width: 100%;              /* 🔥 ocupa toda la celda (30px) */
+  height: 22px;             /* 🔥 ajustado a fila compacta */
+  font-size: 13px;
+  text-align: center;
+
+  border-radius: 2px;       /* más sutil */
+  border: 2px solid transparent;
+  background: #020617;
+  color: black;
+
+  transition: all 0.15s ease;
+}
+
+/* 🔹 foco */
+.score-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(34,197,94,1.0);
+  transform: scale(1.05);
+  z-index: 2;
+  position: relative;
+  background: rgba(34,197,94,0.2);
+}
+
+/* 🔹 hover */
+.score-input:hover {
+  border-color: var(--accent);
+}
+
+.selected {
+  background-color: rgba(0, 123, 255, 0.2);
+}
+
+/* =============================
+   PAR / RESULTADO
+============================= */
+.par {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.birdie {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.bogey {
+  color: #f97316;
+}
+
+.double {
+  color: var(--danger);
+}
+
+/* =============================
+   FOOTER / TOTAL
+============================= */
+.score-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-box {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* =============================
+   BOTÓN
+============================= */
+.login-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;     /* centro horizontal */
+  text-align: center;
+  font-size: 14px !important;
+  font-weight:600;
+  font-family: arial;
+  border-bottom: solid black;
+  color: darkblue;
+  padding: 10px;
+  height: 30px;
+  width:100%;
+  gap:20px;
+}
+
+.login-box h2{
+  font-size: 14px; !important;
+  font-family: arial;
+  padding:0px;
+}
+
+.botones{
+   display: flex;
+   justify-content: space-between;
+} 
+.save-btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: none;
+  padding: 12px 22px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(34,197,94,0.4);
+}
+
+.save-btn:active {
+  transform: scale(0.97);
+}

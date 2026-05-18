@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Tiebreaks</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    table {
+      border-collapse: collapse;
+      margin-bottom: 32px;
+    }
+    th,
+    td {
+      border: 1px solid black;
+      padding: 6px 10px;
+    }
+    th {
+      background: darkblue;
+      color: white;
+    }
+    th:not(:first-child),
+    td:not(:first-child) {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Desempates</h1>
+
+  <label>Torneo:</label>
+
+  <select id="tournament-select">
+    <option value="">Seleccionar torneo</option>
+  </select>
+
+  <hr>
+
+  <div id="tables-container"></div>
+
+  <script type="module" src="js/admin-tiebreaks.js?v=3"></script>
+
+</body>
+</html>

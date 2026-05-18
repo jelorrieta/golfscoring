@@ -1,0 +1,33 @@
+.filter-trigger{
+  background-color:white;
+  border-radius:12px;
+  border-width:1px;
+  border-color:#aaaaaa;
+  padding:12px;
+  cursor:pointer;
+}
+
+.filter-trigger-content{
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  gap:8px;
+}
+
+.filter-label{
+  font-size: 12px;
+  color:black;
+  font-weight:600;
+  font-family: Helvetica;
+}
+
+.filter-value{
+  margin:0;
+  font-size:12px;
+  font-weight:600;
+  color:#777777;
+}
+
+.select-buttons{
+  padding:5px;
+}
