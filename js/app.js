@@ -18,6 +18,7 @@ let currentSortBy = null;
 
 function getDefaultSortBy() {
   const tournament = tournamentsCacheById[currentTournamentId];
+  console.log(tournament);
   const formatName = tournament?.format?.name;
   switch (formatName) {
     case 'stableford':
