@@ -27,36 +27,6 @@ function getDefaultSortBy() {
   }
 }
 
-// =============================
-// CATEGORY FILTER VISUAL
-// =============================
-
-function applyCategoryVisibility(categoryId = null) {
-  const rows = document.querySelectorAll('.leaderboard-table tbody tr');
-  let currentRank = 0;
-  let previousPos = null;
-  rows.forEach(row => {
-    const category = row.dataset.categoryId;
-    if (!categoryId || category === categoryId) {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
-    }
-    const originalPos =
-      Number(row.dataset.pos);
-
-    // ranking visual dentro categoría
-    if (originalPos !== previousPos) {
-      currentRank++;
-    }
-    previousPos = originalPos;
-    const posCell =
-      row.querySelector('.pos_col');
-    if (posCell) {
-      posCell.textContent = currentRank;
-    }
-  });
-}
 
 // =============================
 // INIT DATA
@@ -122,13 +92,31 @@ function populateCategories(categories) {
 // =============================
 
 async function syncFiltersAndInit() {
-  const tournamentSelect = document.getElementById("tournament");
-  currentTournamentId = tournamentSelect.value || null;
+
+  const tournamentSelect =
+    document.getElementById("tournament");
+
+  currentTournamentId =
+    tournamentSelect.value || null;
+
   setTournamentTitleFromSelect(tournamentSelect);
+
   document.getElementById("category").value = "";
-  await loadCategoriesByTournament(currentTournamentId);
+
+  await loadCategoriesByTournament(
+    currentTournamentId
+  );
+
+  currentSortBy = getDefaultSortBy();
+
+  // SOLO AQUÍ RPC
+  await loadLeaderboardData({
+    sortBy: currentSortBy
+  });
+
+  // render desde cache
   await initLeaderboard({
-    sortBy: getDefaultSortBy(),
+    sortBy: currentSortBy,
     categoryId: null
   });
 }
@@ -137,19 +125,21 @@ async function syncFiltersAndInit() {
 // LEADERBOARD DATA (RPC v3)
 // =============================
 
-async function loadLeaderboardData({ sortBy, categoryId }) {
+async function loadLeaderboardData({ sortBy }) {
   if (!currentTournamentId) {
     leaderboardCache = [];
     leaderboardMeta = null;
     return;
   }
-  const { data, error } = await supabase.rpc('get_lb_v3',
+  const { data, error } = await supabase.rpc(
+    'get_lb_v3',
     {
       p_tournament_id: currentTournamentId,
-      p_category_id: categoryId,
+      p_category_id: null,
       p_sort: sortBy
     }
   );
+
   if (error) throw error;
   leaderboardCache = data?.data || [];
   leaderboardMeta = data?.meta || null;
@@ -269,16 +259,23 @@ async function initLeaderboard({
   categoryId = null
 } = {}) {
   currentSortBy = sortBy;
-  const container = document.getElementById('leaderboard');
+  const container =
+    document.getElementById('leaderboard');
   container.style.opacity = "0.7";
   try {
-    await loadLeaderboardData({ sortBy, categoryId });
-    const data = leaderboardCache;
-    if (!data || data.length === 0) {
+    let data = [...leaderboardCache];
+    // filtro categoría local
+    if (categoryId) {
+      data = data.filter(
+        r => String(r.category_id) === String(categoryId)
+      );
+    }
+    if (!data.length) {
       container.innerHTML = `<div>Sin datos</div>`;
       return;
     }
-    container.innerHTML = buildLeaderboardTable(data, { sortBy });
+    container.innerHTML =
+      buildLeaderboardTable(data, { sortBy });
   } catch (err) {
     console.error(err);
     container.innerHTML = `
@@ -313,7 +310,10 @@ function bindCategoryFilter() {
   if (!select) return;
   select.addEventListener("change", (e) => {
     const categoryId = e.target.value || null;
-    applyCategoryVisibility(categoryId);
+    initLeaderboard({
+      sortBy: currentSortBy,
+      categoryId
+    });
   });
 }
 
