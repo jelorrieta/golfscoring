@@ -28,6 +28,22 @@ function getDefaultSortBy() {
 }
 
 // =============================
+// CATEGORY FILTER VISUAL
+// =============================
+
+function applyCategoryVisibility(categoryId = null) {
+  const rows = document.querySelectorAll('.leaderboard-table tbody tr');
+  rows.forEach(row => {
+    const category = row.dataset.categoryId;
+    if (!categoryId || category === categoryId) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+}
+
+// =============================
 // INIT DATA
 // =============================
 
@@ -171,7 +187,8 @@ function buildLeaderboardTable(data, { sortBy }) {
       </tr>
     </thead>
   `;
-
+  
+  let previousPos = null;
   const rowsHtml = data.map(row => {
     let name = row.player_name;
     if (formatName === 'scramble') {
@@ -180,11 +197,17 @@ function buildLeaderboardTable(data, { sortBy }) {
         <div class="guest">${row.guest}</div>`;
     }
 
+    const posText =
+      row.pos === previousPos
+        ? ''
+        : (row.pos ?? '');
+    previousPos = row.pos;
+
     return `
       <tr>
 
         <td class="pos_col" style="text-align:center; font-weight:600; padding:8px;">
-          ${row.pos ?? ''}
+          ${posText ?? ''}
         </td>
 
         <td class="player-cell"
@@ -280,10 +303,7 @@ function bindCategoryFilter() {
   if (!select) return;
   select.addEventListener("change", (e) => {
     const categoryId = e.target.value || null;
-    initLeaderboard({
-      sortBy: currentSortBy || getDefaultSortBy(),
-      categoryId
-    });
+    applyCategoryVisibility(categoryId);
   });
 }
 
