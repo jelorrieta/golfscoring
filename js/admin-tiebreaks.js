@@ -66,7 +66,7 @@ async function loadLeaderboard(tournamentId) {
   container.innerHTML = 'Cargando...';
 
   const { data, error } = await supabase.rpc(
-    'get_tb_tables_v3',
+    'get_tb_tables_v2',
     {
       p_tournament_id: tournamentId
     }
