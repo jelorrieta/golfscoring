@@ -171,12 +171,22 @@ function renderTable(
   // =============================
 
   const tbody = document.createElement('tbody');
+  let visualRank = "";
+  let previousValue = null;
+  let i=0;
   for (const row of rows) {
+    i += 1;
+    visualRank = i;
+    if(row.pos === previousValue){
+      visualRank="";
+    }
+    previousValue = row.pos;
+
     const tr = document.createElement('tr');
     const cells = [
-      row.pos,
+      visualRank,
       row.guest
-        ? `${row.player_name} (${row.guest})`
+        ? `${row.player_name} - ${row.guest}`
         : row.player_name,
 
       row.score,
