@@ -64,21 +64,9 @@ async function loadTournaments() {
 async function loadLeaderboard(tournamentId) {
 
   container.innerHTML = 'Cargando...';
-  const tournament = tournamentsCacheById[tournamentId];
-  const formatName = tournament?.format_name;
-
-  const scoreField =
-    formatName === 'stableford'
-      ? 'stb_gross'
-      : 'strokes';
-
-  const netField =
-    formatName === 'stableford'
-      ? 'stb_net'
-      : 'net';
 
   const { data, error } = await supabase.rpc(
-    'get_tb_tables_v2',
+    'get_tb_tables_v3',
     {
       p_tournament_id: tournamentId
     }
@@ -96,43 +84,41 @@ async function loadLeaderboard(tournamentId) {
 
   if (!data?.length) {
     container.innerHTML = `
-      <div>
-        Sin datos
-      </div>
+      <div>Sin datos</div>
     `;
     return;
   }
 
   container.innerHTML = '';
+
   const grouped = {};
 
   for (const row of data) {
+
     const category =
       row.category || 'Sin categoría';
-    const indicator =
-      row.tb_type || 'General';
+
     if (!grouped[category]) {
       grouped[category] = {};
     }
-    if (!grouped[category][indicator]) {
-      grouped[category][indicator] = [];
+
+    if (!grouped[category][row.tb_type]) {
+      grouped[category][row.tb_type] = [];
     }
-    grouped[category][indicator].push({
-      ...row,
-      score: row[scoreField],
-      score_net: row[netField]
-    });
+
+    grouped[category][row.tb_type].push(row);
   }
 
-  for (const [categoryName, indicators]
-    of Object.entries(grouped)) {
-    for (const [indicatorName, rows]
-      of Object.entries(indicators)) {
+  for (const [categoryName, tables] of Object.entries(grouped)) {
+
+    for (const [tbType, rows] of Object.entries(tables)) {
+
       renderTable(
         categoryName,
-        indicatorName,
+        tbType,
         rows
       );
+
     }
   }
 }
