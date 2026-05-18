@@ -19,7 +19,6 @@ let currentSortBy = null;
 function getDefaultSortBy() {
   const tournament = tournamentsCacheById[currentTournamentId];
   const formatName = tournament?.format?.name;
-
   switch (formatName) {
     case 'stableford':
       return 'stb_gross';
@@ -33,17 +32,11 @@ function getDefaultSortBy() {
 // =============================
 
 async function loadInitialData() {
-
-  const { data: tournaments } = await supabase
-    .from('tournaments')
-    .select(`id, name, ties, format(name)`)
-    .order('start_date', { ascending: true });
-
+  const { data: tournaments } = await supabase.rpc('get_tournaments');
   if (tournaments) {
     populateTournaments(tournaments);
     setTournamentTitle(tournaments);
   }
-
   tournamentsCacheById = Object.fromEntries(
     tournaments.map(t => [t.id, t])
   );
