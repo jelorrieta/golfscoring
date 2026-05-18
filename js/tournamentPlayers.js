@@ -17,77 +17,27 @@ let selectedRoundId = null;
 // =============================
 
 async function fetchTournaments() {
-  const { data, error } = await supabase
-    .from("tournaments")
-    .select("id, name");
-
-  if (error) {
-    console.error("Error cargando torneos:", error);
-    return [];
-  }
-
+  const data = await supabase.rpc('get_tournaments');
   return data;
 }
 
 async function fetchCategories() {
-  const { data, error } = await supabase
-    .from("categories")
-    .select("id, name");
-
-  if (error) {
-    console.error("Error cargando categorías:", error);
-    return [];
-  }
-
+  const data = await supabase.rpc('get_categories');
   return data;
 }
 
 async function fetchRounds() {
-  const { data, error } = await supabase
-    .from("rounds")
-    .select("id, round_number");
-
-  if (error) {
-    console.error("Error cargando rondas:", error);
-    return [];
-  }
-
+  const data = await supabase.rpc('get_rounds');
   return data;
 }
 
 async function fetchPlayers() {
-  const { data, error } = await supabase
-    .from("players")
-    .select("id, name, handicap_index")
-    .order("name", { ascending: true });
-
-  if (error) {
-    console.error("Error cargando jugadores:", error);
-    return [];
-  }
-
+  const data = await supabase.rpc('get_players');
   return data;
 }
 
 async function fetchTournamentPlayers(tournamentId) {
-  const { data, error } = await supabase
-    .from("tournament_players")
-    .select(`
-      player_id,
-      playing_index,
-      category_id,
-      guest,
-      guest_index,
-      guest_category,
-      playing_handicap
-    `)
-    .eq("tournament_id", tournamentId);
-
-  if (error) {
-    console.error("Error cargando tournament_players:", error);
-    return [];
-  }
-
+  const data = await supabase.rpc('get_tournament_players(tournamentId');
   return data;
 }
 
