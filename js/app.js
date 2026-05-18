@@ -33,12 +33,27 @@ function getDefaultSortBy() {
 
 function applyCategoryVisibility(categoryId = null) {
   const rows = document.querySelectorAll('.leaderboard-table tbody tr');
+  let currentRank = 0;
+  let previousPos = null;
   rows.forEach(row => {
     const category = row.dataset.categoryId;
     if (!categoryId || category === categoryId) {
       row.style.display = '';
     } else {
       row.style.display = 'none';
+    }
+    const originalPos =
+      Number(row.dataset.pos);
+
+    // ranking visual dentro categoría
+    if (originalPos !== previousPos) {
+      currentRank++;
+    }
+    previousPos = originalPos;
+    const posCell =
+      row.querySelector('.pos_col');
+    if (posCell) {
+      posCell.textContent = currentRank;
     }
   });
 }
@@ -188,7 +203,6 @@ function buildLeaderboardTable(data, { sortBy }) {
     </thead>
   `;
   
-  let previousPos = null;
   const rowsHtml = data.map(row => {
     let name = row.player_name;
     if (formatName === 'scramble') {
@@ -197,17 +211,13 @@ function buildLeaderboardTable(data, { sortBy }) {
         <div class="guest">${row.guest}</div>`;
     }
 
-    const posText =
-      row.pos === previousPos
-        ? ''
-        : (row.pos ?? '');
-    previousPos = row.pos;
-
     return `
-      <tr data-category-id="${row.category_id ?? ''}">
-
+      <tr
+        data-category-id="${row.category_id ?? ''}"
+        data-pos="${row.pos ?? ''}"
+      >
         <td class="pos_col" style="text-align:center; font-weight:600; padding:8px;">
-          ${posText ?? ''}
+          ${row.pos ?? ''}
         </td>
 
         <td class="player-cell"
