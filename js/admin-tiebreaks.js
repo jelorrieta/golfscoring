@@ -3,6 +3,8 @@ import { supabase } from './supabaseClient.js';
 const tournamentSelect =
   document.getElementById('tournament-select');
 
+
+
 const container =
   document.getElementById('tables-container');
 
@@ -13,6 +15,7 @@ const TB_LABELS = {
   stb_gross: 'Puntos Stableford Gross'
 };
 
+let tournamentsCacheById = {};
 init();
 
 // =============================
@@ -41,6 +44,9 @@ async function init() {
 
 async function loadTournaments() {
   const { data: tournaments } = await supabase.rpc('get_tournaments');
+  tournamentsCacheById = Object.fromEntries(
+    tournaments.map(t => [t.id, t])
+  );
   tournamentSelect.innerHTML = '';
   for (const tournament of tournaments) {
     const option = document.createElement('option');
@@ -56,7 +62,21 @@ async function loadTournaments() {
 // =============================
 
 async function loadLeaderboard(tournamentId) {
+
   container.innerHTML = 'Cargando...';
+  const tournament = tournamentsCacheById[tournamentId];
+  const formatName = tournament?.format_name;
+
+  const scoreField =
+    formatName === 'stableford'
+      ? 'stb_gross'
+      : 'strokes';
+
+  const netField =
+    formatName === 'stableford'
+      ? 'stb_net'
+      : 'net';
+
   const { data, error } = await supabase.rpc(
     'get_tb_tables_v2',
     {
@@ -73,6 +93,7 @@ async function loadLeaderboard(tournamentId) {
     `;
     return;
   }
+
   if (!data?.length) {
     container.innerHTML = `
       <div>
@@ -84,6 +105,7 @@ async function loadLeaderboard(tournamentId) {
 
   container.innerHTML = '';
   const grouped = {};
+
   for (const row of data) {
     const category =
       row.category || 'Sin categoría';
@@ -95,11 +117,17 @@ async function loadLeaderboard(tournamentId) {
     if (!grouped[category][indicator]) {
       grouped[category][indicator] = [];
     }
-    grouped[category][indicator].push(row);
+    grouped[category][indicator].push({
+      ...row,
+      score: row[scoreField],
+      score_net: row[netField]
+    });
   }
 
-  for (const [categoryName, indicators] of Object.entries(grouped)) {
-    for (const [indicatorName, rows] of Object.entries(indicators)) {
+  for (const [categoryName, indicators]
+    of Object.entries(grouped)) {
+    for (const [indicatorName, rows]
+      of Object.entries(indicators)) {
       renderTable(
         categoryName,
         indicatorName,
