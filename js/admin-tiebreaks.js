@@ -7,10 +7,10 @@ const container =
   document.getElementById('tables-container');
 
 const TB_LABELS = {
-  strokes: 'Golpes',
-  net: 'Neto',
-  stb_net: 'Stableford Neto',
-  stb_gross: 'Stableford Gross'
+  strokes: 'Golpes Totales',
+  net: 'Golpes Netos',
+  stb_net: 'Puntos Stableford Neto',
+  stb_gross: 'Puntos Stableford Gross'
 };
 
 init();
