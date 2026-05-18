@@ -28,6 +28,21 @@ function getDefaultSortBy() {
   }
 }
 
+function getPosField(sortBy) {
+  switch (sortBy) {
+    case 'strokes':
+      return 'pos_g';
+    case 'net':
+      return 'pos_n';
+    case 'stb_gross':
+      return 'pos_sg';
+    case 'stb_net':
+      return 'pos_sn';
+    default:
+      return 'pos_g';
+  }
+}
+
 
 // =============================
 // INIT DATA
@@ -93,21 +108,14 @@ function populateCategories(categories) {
 // =============================
 
 async function syncFiltersAndInit() {
-
   const tournamentSelect =
     document.getElementById("tournament");
-
   currentTournamentId =
     tournamentSelect.value || null;
-
   setTournamentTitleFromSelect(tournamentSelect);
-
   document.getElementById("category").value = "";
-
   await loadCategoriesByTournament(currentTournamentId);
-
   currentSortBy = getDefaultSortBy();
-
   // SOLO AQUÍ RPC
   await reloadLeaderboard({
     sortBy: currentSortBy
@@ -184,7 +192,9 @@ function buildLeaderboardTable(data, { sortBy }) {
   const tournamentSelect = document.getElementById("tournament");  
   currentTournamentId = tournamentSelect.value || null;
   const tournament = tournamentsCacheById[currentTournamentId];
-  const formatName = tournament?.format?.name;
+  const formatName = tournament?.format_name;
+  const posField = getPosField(sortBy);
+
   const header = `
     <thead>
       <tr>
@@ -220,16 +230,14 @@ function buildLeaderboardTable(data, { sortBy }) {
 
   const rowsHtml = data.map((row, index) => {
     let name = row.player_name;
-
+    
     if (formatName === 'scramble') {
       name =
       ` <div class="player">${row.player_name}</div>
         <div class="guest">${row.guest}</div>`;
     }
 
-    const currentValue =
-      row[sortBy];
-
+    const currentValue = row[posField];
     if (currentValue !== previousValue) {
       visualRank = index + 1;
     }
@@ -309,6 +317,13 @@ async function initLeaderboard({
 
   let data = [...leaderboardCache];
 
+  const posField = getPosField(sortBy);
+
+  data.sort((a, b) => {
+    return (a[posField] ?? 9999)
+         - (b[posField] ?? 9999);
+  });
+
   if (categoryId) {
     data = data.filter(
       r => String(r.category_id) === String(categoryId)
@@ -334,9 +349,11 @@ function bindLeaderboardEvents() {
     if (!btn) return;
     const sortBy = btn.dataset.sort;
     if (!isValidSort(sortBy)) return;
+    currentSortBy = sortBy;
     const categoryId = document.getElementById("category").value || null;
-    reloadLeaderboard({
-      sortBy
+    initLeaderboard({
+      sortBy,
+      categoryId
     });
   });
 }
@@ -367,7 +384,7 @@ document.addEventListener('click', async (e) => {
   const tournamentSelect = document.getElementById("tournament");  
   currentTournamentId = tournamentSelect.value || null;
   const tournament = tournamentsCacheById[currentTournamentId];
-  format = tournament?.format?.name;
+  format = tournament?.format_name;
   toggleScorecardRow(tr, {
     round_id,
     tournament_player_id,
