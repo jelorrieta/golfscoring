@@ -110,14 +110,8 @@ async function syncFiltersAndInit() {
   currentSortBy = getDefaultSortBy();
 
   // SOLO AQUÍ RPC
-  await loadLeaderboardData({
+  await reloadLeaderboard({
     sortBy: currentSortBy
-  });
-
-  // render desde cache
-  await initLeaderboard({
-    sortBy: currentSortBy,
-    categoryId: null
   });
 }
 
@@ -143,6 +137,35 @@ async function loadLeaderboardData({ sortBy }) {
   if (error) throw error;
   leaderboardCache = data?.data || [];
   leaderboardMeta = data?.meta || null;
+}
+
+async function reloadLeaderboard({
+  sortBy
+}) {
+  const container =
+    document.getElementById('leaderboard');
+
+  container.style.opacity = "0.7";
+  try {
+    await loadLeaderboardData({
+      sortBy
+    });
+    const categoryId =
+      document.getElementById("category").value || null;
+    await initLeaderboard({
+      sortBy,
+      categoryId
+    });
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = `
+      <div style="color:red;">
+        Error leaderboard
+      </div>
+    `;
+  }
+
+  container.style.opacity = "1";
 }
 
 // =============================
@@ -279,33 +302,27 @@ async function initLeaderboard({
   sortBy = 'strokes',
   categoryId = null
 } = {}) {
+
   currentSortBy = sortBy;
+
   const container =
     document.getElementById('leaderboard');
-  container.style.opacity = "0.7";
-  try {
-    let data = [...leaderboardCache];
-    // filtro categoría local
-    if (categoryId) {
-      data = data.filter(
-        r => String(r.category_id) === String(categoryId)
-      );
-    }
-    if (!data.length) {
-      container.innerHTML = `<div>Sin datos</div>`;
-      return;
-    }
-    container.innerHTML =
-      buildLeaderboardTable(data, { sortBy });
-  } catch (err) {
-    console.error(err);
-    container.innerHTML = `
-      <div style="color:red;">
-        Error leaderboard
-      </div>
-    `;
+
+  let data = [...leaderboardCache];
+
+  if (categoryId) {
+    data = data.filter(
+      r => String(r.category_id) === String(categoryId)
+    );
   }
-  container.style.opacity = "1";
+
+  if (!data.length) {
+    container.innerHTML = `<div>Sin datos</div>`;
+    return;
+  }
+
+  container.innerHTML =
+    buildLeaderboardTable(data, { sortBy });
 }
 
 // =============================
@@ -319,9 +336,8 @@ function bindLeaderboardEvents() {
     const sortBy = btn.dataset.sort;
     if (!isValidSort(sortBy)) return;
     const categoryId = document.getElementById("category").value || null;
-    initLeaderboard({
-      sortBy,
-      categoryId
+    reloadLeaderboard({
+      sortBy
     });
   });
 }
