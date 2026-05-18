@@ -204,7 +204,7 @@ function buildLeaderboardTable(data, { sortBy }) {
     previousPos = row.pos;
 
     return `
-      <tr>
+      <tr data-category-id="${row.category_id ?? ''}">
 
         <td class="pos_col" style="text-align:center; font-weight:600; padding:8px;">
           ${posText ?? ''}
