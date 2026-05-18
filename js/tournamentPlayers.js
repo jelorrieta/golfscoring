@@ -28,6 +28,7 @@ async function fetchCategories() {
 
 async function fetchRounds() {
   const {data} = await supabase.rpc('get_rounds');
+  console.log(data);
   return data;
 }
 
