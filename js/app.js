@@ -193,42 +193,63 @@ function buildLeaderboardTable(data, { sortBy }) {
     </thead>
   `;
   
-  const rowsHtml = data.map(row => {
+  let visualRank = 0;
+  let previousValue = null;
+
+  const rowsHtml = data.map((row, index) => {
     let name = row.player_name;
+
     if (formatName === 'scramble') {
-      name = 
+      name =
       ` <div class="player">${row.player_name}</div>
         <div class="guest">${row.guest}</div>`;
     }
 
+    const currentValue =
+      row[sortBy];
+
+    if (currentValue !== previousValue) {
+      visualRank = index + 1;
+    }
+
+    previousValue = currentValue;
+
     return `
       <tr
         data-category-id="${row.category_id ?? ''}"
-        data-pos="${row.pos ?? ''}"
       >
-        <td class="pos_col" style="text-align:center; font-weight:600; padding:8px;">
-          ${row.pos ?? ''}
+        <td
+          class="pos_col"
+          style="text-align:center; font-weight:600; padding:8px;"
+        >
+          ${visualRank}
         </td>
-
-        <td class="player-cell"
-            data-round-id="${row.round_id}"
-            data-tp-id="${row.tournament_player_id}"
-            data-tournament-id="${row.tournament_id}"
-            style="cursor:pointer;">
-              <div class="player_name">${name}</div>
-              <span class="category">&nbsp;&nbsp;${row.category_alias ?? row.category_name ?? '-'}</span>
+        <td
+          class="player-cell"
+          data-round-id="${row.round_id}"
+          data-tp-id="${row.tournament_player_id}"
+          data-tournament-id="${row.tournament_id}"
+          style="cursor:pointer;"
+        >
+          <div class="player_name">${name}</div>
+          <span class="category">
+            &nbsp;&nbsp;
+            ${row.category_alias ?? row.category_name ?? '-'}
+          </span>
         </td>
-
         ${
           cfg?.columns?.map(col => {
             const isActive = sortBy === col.key;
             return `
-            <td style="text-align:center;" class="${isActive ? 'columna_orden_d' : ''}">
-              ${row[col.key] ?? 0}
-            </td>
-          `}).join('') || ''
+              <td
+                style="text-align:center;"
+                class="${isActive ? 'columna_orden_d' : ''}"
+              >
+                ${row[col.key] ?? 0}
+              </td>
+            `;
+          }).join('') || ''
         }
-
       </tr>
     `;
   }).join('');
