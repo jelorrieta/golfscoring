@@ -43,17 +43,14 @@ async function loadInitialData() {
 }
 
 async function loadCategoriesByTournament(tournamentId) {
-
   if (!tournamentId) {
     populateCategories([]);
     return;
   }
-
   const { data, error } = await supabase.rpc(
     'get_categories_v1',
     { p_tournament_id: tournamentId }
   );
-
   if (error) {
     console.error(error);
     return;
@@ -238,37 +235,25 @@ async function initLeaderboard({
   sortBy = 'strokes',
   categoryId = null
 } = {}) {
-
   currentSortBy = sortBy;
-
   const container = document.getElementById('leaderboard');
-
   container.style.opacity = "0.7";
-
   try {
-
     await loadLeaderboardData({ sortBy, categoryId });
-
     const data = leaderboardCache;
-
     if (!data || data.length === 0) {
       container.innerHTML = `<div>Sin datos</div>`;
       return;
     }
-
     container.innerHTML = buildLeaderboardTable(data, { sortBy });
-
   } catch (err) {
-
     console.error(err);
-
     container.innerHTML = `
       <div style="color:red;">
         Error leaderboard
       </div>
     `;
   }
-
   container.style.opacity = "1";
 }
 
@@ -277,19 +262,12 @@ async function initLeaderboard({
 // =============================
 
 function bindLeaderboardEvents() {
-
   document.addEventListener('click', (e) => {
-
     const btn = e.target.closest('.sort-header');
     if (!btn) return;
-
     const sortBy = btn.dataset.sort;
-
     if (!isValidSort(sortBy)) return;
-
-    const categoryId =
-      document.getElementById("category").value || null;
-
+    const categoryId = document.getElementById("category").value || null;
     initLeaderboard({
       sortBy,
       categoryId
@@ -298,14 +276,10 @@ function bindLeaderboardEvents() {
 }
 
 function bindCategoryFilter() {
-
   const select = document.getElementById("category");
   if (!select) return;
-
   select.addEventListener("change", (e) => {
-
     const categoryId = e.target.value || null;
-
     initLeaderboard({
       sortBy: currentSortBy || getDefaultSortBy(),
       categoryId
@@ -318,21 +292,16 @@ function bindCategoryFilter() {
 // =============================
 
 document.addEventListener('click', async (e) => {
-
   const cell = e.target.closest('.player-cell');
   if (!cell) return;
-
   const tr = cell.closest('tr');
-
   const round_id = cell.dataset.roundId;
   const tournament_player_id = cell.dataset.tpId;
-
   if (!round_id || !tournament_player_id) return;
   const tournamentSelect = document.getElementById("tournament");  
   currentTournamentId = tournamentSelect.value || null;
   const tournament = tournamentsCacheById[currentTournamentId];
   format = tournament?.format?.name;
-
   toggleScorecardRow(tr, {
     round_id,
     tournament_player_id,
@@ -344,41 +313,25 @@ document.addEventListener('click', async (e) => {
 // SCORECARD EXPAND
 // =============================
 
-async function toggleScorecardRow(
-  tr,
-  { round_id, tournament_player_id, format }
-) {
-
+async function toggleScorecardRow(tr, { round_id, tournament_player_id, format }) {
   const nextRow = tr.nextElementSibling;
-
   if (nextRow?.classList.contains('detail-row')) {
     nextRow.remove();
     return;
   }
-
   document.querySelectorAll('.detail-row').forEach(el => el.remove());
-
   const detailRow = document.createElement('tr');
   detailRow.classList.add('detail-row');
-
   const td = document.createElement('td');
   td.colSpan = tr.children.length;
-
   td.innerHTML = `<div class="scorecard-wrapper">Cargando...</div>`;
-
   detailRow.appendChild(td);
   tr.insertAdjacentElement('afterend', detailRow);
-
   const wrapper = td.querySelector('.scorecard-wrapper');
-
   const container = document.createElement('div');
   container.style.display = 'none';
-
   wrapper.appendChild(container);
-
-  const tournament_id =
-    document.getElementById("tournament")?.value;
-
+  const tournament_id = document.getElementById("tournament")?.value;
   await renderScorecardInElement({
     container,
     round_id,
@@ -389,7 +342,6 @@ async function toggleScorecardRow(
 
   wrapper.innerHTML = '';
   wrapper.appendChild(container);
-
   container.style.display = 'block';
 }
 
@@ -398,19 +350,14 @@ async function toggleScorecardRow(
 // =============================
 
 document.addEventListener("DOMContentLoaded", async () => {
-
   await loadInitialData();
-
   bindCategoryFilter();
   bindLeaderboardEvents();
-
   const tournamentSelect =
     document.getElementById("tournament");
-
   setTimeout(() => {
     syncFiltersAndInit();
   }, 0);
-
   tournamentSelect.addEventListener("change", () => {
     syncFiltersAndInit();
   });
@@ -421,19 +368,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 // =============================
 
 function setTournamentTitle(tournaments) {
-
   const selected = tournaments.find(
     t => t.name === "Apertura 2026"
   );
-
   document.getElementById("torneo").textContent =
     selected ? " " + selected.name : "s";
 }
-
 function setTournamentTitleFromSelect(select) {
-
   const value = select.value;
-
   document.getElementById("torneo").textContent =
     value
       ? " " + select.options[select.selectedIndex].text
