@@ -40,17 +40,7 @@ async function init() {
 // =============================
 
 async function loadTournaments() {
-  const { data, error } = await supabase
-    .from('tournaments')
-    .select('id, name')
-    .order('start_date', {
-      ascending: false
-    });
-  if (error) {
-    console.error(error);
-    return [];
-  }
-  const tournaments = data || [];
+  const { data: tournaments } = await supabase.rpc('get_tournaments');
   tournamentSelect.innerHTML = '';
   for (const tournament of tournaments) {
     const option = document.createElement('option');
@@ -58,7 +48,6 @@ async function loadTournaments() {
     option.textContent = tournament.name;
     tournamentSelect.appendChild(option);
   }
-
   return tournaments;
 }
 
@@ -76,17 +65,14 @@ async function loadLeaderboard(tournamentId) {
   );
 
   if (error) {
-
     console.error(error);
     container.innerHTML = `
       <div style="color:red;">
         Error cargando tablas
       </div>
     `;
-
     return;
   }
-
   if (!data?.length) {
     container.innerHTML = `
       <div>
@@ -106,7 +92,6 @@ async function loadLeaderboard(tournamentId) {
     if (!grouped[category]) {
       grouped[category] = {};
     }
-
     if (!grouped[category][indicator]) {
       grouped[category][indicator] = [];
     }
@@ -133,9 +118,7 @@ function renderTable(
   indicatorName,
   rows
 ) {
-
   if (!rows?.length) return;
-
   const wrapper = document.createElement('div');
   wrapper.className = 'tb-wrapper';
   const title = document.createElement('h2');
@@ -198,7 +181,6 @@ function renderTable(
 
     tbody.appendChild(tr);
   }
-
   table.appendChild(tbody);
   wrapper.appendChild(table);
   container.appendChild(wrapper);
