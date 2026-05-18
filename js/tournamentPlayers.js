@@ -37,7 +37,7 @@ async function fetchPlayers() {
 }
 
 async function fetchTournamentPlayers(tournamentId) {
-  const {data} = await supabase.rpc('get_tournament_players(tournamentId)');
+  const {data} = await supabase.rpc('get_tournament_players',{p_tournament_id: tournamentId});
   return data;
 }
 
