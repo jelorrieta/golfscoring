@@ -89,29 +89,13 @@ let rounds = [];
 // =============================
 
 async function fetchTournaments() {
-  const { data, error } = await supabase
-    .from("tournaments")
-    .select("id, name");
-
-  if (error) {
-    console.error(error);
-    return [];
-  }
-
+  const {data} = await supabase.rpc('get_tournaments');
   return data;
 }
 
 // OPCIÓN B: rounds globales
 async function fetchRounds() {
-  const { data, error } = await supabase
-    .from("rounds")
-    .select("id, round_number");
-
-  if (error) {
-    console.error(error);
-    return [];
-  }
-
+  const {data} = await supabase.rpc('get_rounds');
   return data;
 }
 
