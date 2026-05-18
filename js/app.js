@@ -19,7 +19,7 @@ let currentSortBy = null;
 function getDefaultSortBy() {
   const tournament = tournamentsCacheById[currentTournamentId];
   console.log(tournament);
-  const formatName = tournament?.format?.name;
+  const formatName = tournament?.format_name;
   switch (formatName) {
     case 'stableford':
       return 'stb_gross';
@@ -103,6 +103,8 @@ async function syncFiltersAndInit() {
   setTournamentTitleFromSelect(tournamentSelect);
 
   document.getElementById("category").value = "";
+
+  await loadCategoriesByTournament(currentTournamentId);
 
   currentSortBy = getDefaultSortBy();
 
