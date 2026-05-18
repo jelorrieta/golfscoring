@@ -17,27 +17,27 @@ let selectedRoundId = null;
 // =============================
 
 async function fetchTournaments() {
-  const data = await supabase.rpc('get_tournaments');
+  const {data} = await supabase.rpc('get_tournaments');
   return data;
 }
 
 async function fetchCategories() {
-  const data = await supabase.rpc('get_categories');
+  const {data} = await supabase.rpc('get_categories');
   return data;
 }
 
 async function fetchRounds() {
-  const data = await supabase.rpc('get_rounds');
+  const {data} = await supabase.rpc('get_rounds');
   return data;
 }
 
 async function fetchPlayers() {
-  const data = await supabase.rpc('get_players');
+  const {data} = await supabase.rpc('get_players');
   return data;
 }
 
 async function fetchTournamentPlayers(tournamentId) {
-  const data = await supabase.rpc('get_tournament_players(tournamentId');
+  const {data} = await supabase.rpc('get_tournament_players(tournamentId');
   return data;
 }
 
