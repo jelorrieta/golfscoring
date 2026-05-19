@@ -456,7 +456,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   tournamentSelect.addEventListener("change", () => {
     const tournamentId = tournamentSelect.value;
-    const tournament = tournamentsCacheById.find(t => t.id === tournamentId);
+    const tournament = tournamentsCacheById[tournamentId];
     if (tournament) {
       const url = `/?torneo=${tournament.slug}`;
       window.history.pushState({}, "", url);
