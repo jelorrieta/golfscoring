@@ -1,6 +1,10 @@
 import { supabase } from './supabaseClient.js';
 import { renderScorecardInElement } from './scorecard.js?v3';
 
+const params = new URLSearchParams(window.location.search);
+const tournamentSlug = params.get('tournament');
+console.log(tournamentSlug);
+
 // =============================
 // STATE
 // =============================
