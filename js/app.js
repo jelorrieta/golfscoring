@@ -81,9 +81,9 @@ async function loadCategoriesByTournament(tournamentId) {
 // =============================
 
 function populateTournaments(tournaments) {
-  const select = document.getElementById("tournament");
-  const parts = window.location.pathname.split("/");
-  const slugFromUrl = parts[2]; // /t/:slug
+  const select = document.getElementById("torneo");
+  const slugFromUrl = new URLSearchParams(window.location.search);
+
   console.log(slugFromUrl);
   
   const selectedTournament = slugFromUrl
