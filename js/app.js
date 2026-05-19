@@ -445,15 +445,22 @@ async function toggleScorecardRow(tr, { round_id, tournament_player_id, format }
 // =============================
 
 document.addEventListener("DOMContentLoaded", async () => {
+  
   await loadInitialData();
   bindCategoryFilter();
   bindLeaderboardEvents();
-  const tournamentSelect =
-    document.getElementById("tournament");
+  const tournamentSelect = document.getElementById("tournament");
   setTimeout(() => {
     syncFiltersAndInit();
   }, 0);
+
   tournamentSelect.addEventListener("change", () => {
+    const tournamentId = tournamentSelect.value;
+    const tournament = tournamentsCacheById.find(t => t.id === tournamentId);
+    if (tournament) {
+      const url = `/?torneo=${tournament.slug}`;
+      window.history.pushState({}, "", url);
+    }
     syncFiltersAndInit();
   });
 });
