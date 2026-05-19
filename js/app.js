@@ -1,9 +1,6 @@
 import { supabase } from './supabaseClient.js';
 import { renderScorecardInElement } from './scorecard.js?v3';
 
-const params = new URLSearchParams(window.location.search);
-const tournamentSlug = params.get('tournament');
-console.log(tournamentSlug);
 
 // =============================
 // STATE
@@ -85,15 +82,25 @@ async function loadCategoriesByTournament(tournamentId) {
 
 function populateTournaments(tournaments) {
   const select = document.getElementById("tournament");
-  tournaments.forEach((t, index) => {
+  const params = new URLSearchParams(window.location.search);
+  const slugFromUrl = params.get("tournament");
+  console.log(slugFromUrl);
+  
+  const selectedTournament = slugFromUrl
+    ? tournaments.find(t => t.slug === slugFromUrl)
+    : tournaments[tournaments.length - 1];
+
+  tournaments.forEach((t) => {
     const option = document.createElement("option");
     option.value = t.id;
     option.textContent = t.name;
-    if (index === tournaments.length - 1) {
-      option.selected = true;
-    }
     select.appendChild(option);
   });
+
+  if (selectedTournament) {
+    select.value = selectedTournament.id;
+    select.dispatchEvent(new Event("change"));
+  }
 }
 
 function populateCategories(categories) {
