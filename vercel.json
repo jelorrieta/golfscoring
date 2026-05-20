@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/scores",
+      "destination": "/scores.html"
+    },
+    {
+      "source": "/jugadoresTorneo",
+      "destination": "/jugadoresTorneo.html"
+    },
+    {
+      "source": "/jugadores",
+      "destination": "/jugadores.html"
+    }
+  ]
+}
