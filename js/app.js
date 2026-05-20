@@ -123,13 +123,28 @@ function populateTournaments(tournaments) {
 
 function populateCategories(categories) {
   const select = document.getElementById("category");
-  select.innerHTML = '<option value="">Todas</option>';
+  select.innerHTML = '';
+
+  const tournament = tournamentsCacheById[currentTournamentId];
+  const formatName = tournament?.format_name;
+
+  if (formatName !== 'menores') {
+    const allOption = document.createElement("option");
+    allOption.value = "";
+    allOption.textContent = "Todas";
+    select.appendChild(allOption);
+  }
+
   categories.forEach(c => {
     const option = document.createElement("option");
     option.value = c.id;
     option.textContent = c.name;
     select.appendChild(option);
   });
+  if (formatName === 'menores' && categories.length) {
+    select.value = categories[0].id;
+  }
+
 }
 
 // =============================
