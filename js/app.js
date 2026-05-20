@@ -53,14 +53,24 @@ function getPosField(sortBy) {
 
 async function loadInitialData() {
   hostname = window.location.hostname;
-  organizationData = await supabase.rpc('get_organization_by_hostname',{ p_hostname: hostname });
+  const { data, error } = await supabase.rpc(
+    'get_organization_by_hostname',
+    { p_hostname: hostname }
+  );
+  if (error) {
+    console.error(error);
+    return;
+  }
+  organizationData = data || [];
+  if (!organizationData.length) {
+    console.error('Organization not found');
+    return;
+  }
   const organizationId = organizationData[0].id;
-  console.log(organizationData);
   const { data: tournaments } = await supabase.rpc(
     'get_tournaments',
     { p_organization_id: organizationId }
   );
-
   if (tournaments) {
     populateTournaments(tournaments);
   }
