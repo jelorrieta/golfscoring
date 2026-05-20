@@ -161,20 +161,15 @@ export async function renderScorecardInElement({
 
     Object.entries(ranges).forEach(([key, [start, end]]) => {
       let sum = 0;
-
       for (let i = start; i <= end; i++) {
-
         const el = table.querySelector(`#${prefix}_${i}`);
-
         const value = parseInt(el?.textContent || 0, 10);
-
         if (!isNaN(value)) {
           sum += value;
         }
       }
 
       const target = table.querySelector(`#${prefix}_${key}`);
-
       if (target) {
         target.textContent = sum;
       }
@@ -186,6 +181,7 @@ export async function renderScorecardInElement({
   sumRowLocal("hole_net");
   sumRowLocal("hole_puntos");
   sumRowLocal("hole_puntos_g");
+  sumRowLocal("hole_contrapar")
 
   // ==========================
   // AGREGAR ESTILOS POR SCORE
