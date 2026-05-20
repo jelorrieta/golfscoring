@@ -53,6 +53,7 @@ async function loadInitialData() {
   const hostname = window.location.hostname;
   const { data } = await supabase.rpc('get_organization_by_hostname',{ p_hostname: hostname });
   const organizationId = data.id;
+  console.log(organizationId);
   const { data: tournaments } = await supabase.rpc(
     'get_tournaments',
     { p_organization_id: organizationId }
