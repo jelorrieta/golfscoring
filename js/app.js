@@ -10,8 +10,10 @@ let currentTournamentId = null;
 let format = "stableford";
 let tournamentsCacheById = {};
 let leaderboardCache = [];
+let organizationData = [];
 let leaderboardMeta = null;
 let currentSortBy = null;
+let hostname = null;
 
 // =============================
 // HELPERS
@@ -50,11 +52,10 @@ function getPosField(sortBy) {
 // =============================
 
 async function loadInitialData() {
-  const hostname = window.location.hostname;
-  console.log(hostname);
-  const { data } = await supabase.rpc('get_organization_by_hostname',{ p_hostname: hostname });
-  const organizationId = data[0].id;
-  console.log(data);
+  hostname = window.location.hostname;
+  organizationData = await supabase.rpc('get_organization_by_hostname',{ p_hostname: hostname });
+  const organizationId = organizationData[0].id;
+  console.log(organizationData);
   const { data: tournaments } = await supabase.rpc(
     'get_tournaments',
     { p_organization_id: organizationId }
@@ -62,7 +63,6 @@ async function loadInitialData() {
 
   if (tournaments) {
     populateTournaments(tournaments);
-    setTournamentTitle(tournaments);
   }
   tournamentsCacheById = Object.fromEntries(
     tournaments.map(t => [t.id, t])
@@ -91,10 +91,8 @@ async function loadCategoriesByTournament(tournamentId) {
 
 function populateTournaments(tournaments) {
   const select = document.getElementById("tournament");
-  
   const params = new URLSearchParams(window.location.search);
   const slugFromUrl = params.get("torneo");
-  console.log(slugFromUrl);
   
   const selectedTournament = slugFromUrl
     ? tournaments.find(t => t.slug === slugFromUrl)
@@ -129,15 +127,16 @@ function populateCategories(categories) {
 // =============================
 
 async function syncFiltersAndInit() {
-  const tournamentSelect =
-    document.getElementById("tournament");
-  currentTournamentId =
-    tournamentSelect.value || null;
+  const tournamentSelect = document.getElementById("tournament");
+  currentTournamentId = tournamentSelect.value || null;
   setTournamentTitleFromSelect(tournamentSelect);
+
+  setOrganizationName(organizationData[0].name;);
+  
   document.getElementById("category").value = "";
   await loadCategoriesByTournament(currentTournamentId);
+  
   currentSortBy = getDefaultSortBy();
-  // SOLO AQUÍ RPC
   await reloadLeaderboard({
     sortBy: currentSortBy
   });
@@ -478,17 +477,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 // TITLES
 // =============================
 
-function setTournamentTitle(tournaments) {
-  const selected = tournaments.find(
-    t => t.name === "Apertura 2026"
-  );
-  document.getElementById("torneo").textContent =
-    selected ? " " + selected.name : "s";
-}
 function setTournamentTitleFromSelect(select) {
-  const value = select.value;
-  document.getElementById("torneo").textContent =
-    value
-      ? " " + select.options[select.selectedIndex].text
-      : "s";
+  const title = select.options[select.selectedIndex]?.text || '';
+  document.getElementById("torneo").textContent = title;
+}
+
+function setOrganizationName(name) {
+  document.getElementById("organization").textContent = name;
 }
