@@ -239,6 +239,7 @@ select{
 .bajada{
   padding:0px 20px;
   font-size:18px;
+  text-transform: uppercase;
 }
 
 footer {
