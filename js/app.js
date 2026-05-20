@@ -50,7 +50,13 @@ function getPosField(sortBy) {
 // =============================
 
 async function loadInitialData() {
-  const { data: tournaments } = await supabase.rpc('get_tournaments');
+  const organizationId = '802306f0-4688-40f6-8eb1-927106d0f846';
+  
+  const { data: tournaments } = await supabase.rpc(
+    'get_tournaments',
+    { p_organization_id: organizationId }
+  );
+
   if (tournaments) {
     populateTournaments(tournaments);
     setTournamentTitle(tournaments);
