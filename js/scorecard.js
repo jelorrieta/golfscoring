@@ -70,6 +70,10 @@ export async function renderScorecardInElement({
   if (format !== "stableford" && format !== "menores") {
     table.appendChild(createRow("Neto", columns, renderNetCell));
   }
+
+  if (format == "menores") {
+    table.appendChild(createRow("Contrapar", columns, renderCPCell));
+  }
   
 
   if (format == "stableford") {
@@ -126,18 +130,15 @@ export async function renderScorecardInElement({
     const el2 = table.querySelector(`#hole_net_${h}`);
     const el3 = table.querySelector(`#hole_puntos_g_${h}`);
     const el4 = table.querySelector(`#hole_puntos_${h}`);
+    const el5 = table.querySelector(`#hole_contrapar_${h}`);
 
     if (parEl) parEl.textContent = s.par;
-
     if (handicapEl) handicapEl.textContent = s.handicap;
-
     if (el) el.textContent = s.strokes;
-
     if (el2) el2.textContent = s.net_strokes;
-
     if (el3) el3.textContent = s.g_stableford_points;
-
     if (el4) el4.textContent = s.stableford_points;
+    if (el5) el5.textContent = (s.strokes - s.par);
 
     if (received) {
       received.textContent =
@@ -514,6 +515,20 @@ function renderPointsCell(col) {
     col.type === "hole"
       ? `hole_puntos_${col.hole}`
       : `hole_puntos_${col.type}`;
+
+  return td;
+}
+
+function renderCPCell(col) {
+
+  const td = createCellElement(
+    getScoreCellClass(col)
+  );
+
+  td.id =
+    col.type === "hole"
+      ? `hole_contrapar_${col.hole}`
+      : `hole_contrapar_${col.type}`;
 
   return td;
 }
