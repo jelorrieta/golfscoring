@@ -1,40 +1,13 @@
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #ffffff;
-    --text: #111111;
-    --card: #f2f2f2;
-    --border: #dddddd;
-  }
-  h1 {
-    color: white;
-  }
-}
-
 :root {
   --green: rgb(0,148,49);
   --light: #ffffff;
-  --gray: #f2f2f2;
-  --border: #ddd;
-  --dark: #111;
-
-  --navy:#0f172a;
-  --navy2:#172554;
-  --bg:#f8fafc;
-  --cell:#ffffff;
-  --line:#e5e7eb;
-  --text:#1e293b;
-  --red:#dc2626;
-  --blue:#2563eb;
-  --total-bg: #eeeeee;
-
-  --shadow:
-    0 10px 30px rgba(0,0,0,.08);
 }
 
 select{
   outline: none;
   box-shadow: none;
   -webkit-tap-highlight-color: transparent;
+  font-size: 12px;
 }
 
 select:focus{
@@ -62,7 +35,6 @@ body {
   background-position: center;  /* centra la imagen */
   background-repeat: no-repeat;
   background-attachment: fixed; /* efecto elegante tipo parallax */
-  
 }
 
 .container {
@@ -110,7 +82,6 @@ h2 {
   height:24px;
   border-left: rgb(200,200,200) solid 1px;
   justify-content:space-between;
-
 }
 
 .top-etiq {
@@ -190,10 +161,6 @@ h2 {
   background:#fff;
 }
 
-select{
-  font-size: 12px;
-}
-
 .players-table {
   display: flex;
   flex-direction: column;
@@ -234,7 +201,7 @@ select{
     font-size:28px;
     color: #ffffff;
     font-weight:600;
-  }
+}
 
 .bajada{
   padding:0px 20px;
@@ -304,6 +271,7 @@ th, td{
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .pos_col{
   width: 10%;
   font-size:24px;
@@ -327,7 +295,6 @@ th, td{
 
 .player-cell-h{
   width:60%;
-
 }
 
 .player_name{
@@ -425,7 +392,6 @@ th, td{
 
 .selectores{
   display: flex;
-
   align-items: center;
 }
 

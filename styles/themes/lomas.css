@@ -1,0 +1,154 @@
+:root {
+  --green: rgb(0,148,49);
+  --light: #ffffff;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--light);
+  color: black;
+  background-image: url("../images/fondo2.jpeg?v=2");
+}
+
+.container {
+  background:
+    linear-gradient(
+      to right,
+      rgba(216,223,216,0.5),
+      rgba(255,255,255,0.5)
+  );
+}
+
+h1 {
+  color: darkgreen;
+}
+
+
+h2 {
+  color: var(--green);
+}
+
+.top-row-form{
+  background: #143f17;
+  border-left: rgb(200,200,200) solid 1px;
+}
+
+.top-sel{
+  color: white;
+}
+
+.top-sel option{
+  background:#014c01;
+}
+
+.row-form{
+  background:
+    linear-gradient(
+      to bottom,
+      rgb(200,200,200),
+      #ffffff
+  );
+  border-left: rgb(200,200,200) solid 1px;
+}
+
+
+.etiq {
+  color:#058000;
+}
+
+.sel{
+  color: #111111;
+}
+
+.sel option{
+  color:#111;
+  background:#fff;
+}
+
+
+.header {
+  color:white;
+  background:
+    linear-gradient(
+      to right,
+      rgb(33, 97, 37),
+      #67cf0e
+  );
+}
+
+.titulo{
+  color: rgba(255,255,220);
+}
+
+.titulo2{
+    color: #ffffff;
+}
+
+footer {
+  background-color:white;
+  color: rgb(4,4,80);
+  border-bottom: 2px solid gray;
+}
+
+/* =============================
+   TABLAS
+============================= */
+
+
+
+table{
+  font-family:sans-serif;
+}
+
+th {
+  background: green;
+  color: white;
+  font-size: 12px;
+}
+
+tr {
+  border-bottom: 1px solid #c5c5c5;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(220,220,220,0.8); /* gris claro */
+}
+
+tr:nth-child(odd) {
+  background-color: rgba(255,255,255,0.8); /* blanco */
+}
+
+td{
+  color:rgb(4,4,80);
+  border-left: solid 1px #ddd;
+}  
+
+.pos_col{
+  color:green;
+}
+
+.player-cell{
+  color:rgb(17, 17, 97);
+}
+
+.category{
+  color: darkgreen;
+}
+
+.columna_orden{
+  background-color: #073a07;
+  color: white;
+}
+
+.columna_orden_d{
+  background-color: green;
+  color: white;
+}
+
+.btn-selector{
+  background: rgba(255,255,255,0.05);
+}
+
+.btn-selector:hover{
+  background: rgba(255,255,255,0.2);
+}
