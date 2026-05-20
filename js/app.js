@@ -51,6 +51,7 @@ function getPosField(sortBy) {
 
 async function loadInitialData() {
   const hostname = window.location.hostname;
+  console.log(hostname);
   const { data } = await supabase.rpc('get_organization_by_hostname',{ p_hostname: hostname });
   const organizationId = data.id;
   console.log(data);
