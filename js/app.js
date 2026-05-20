@@ -1,5 +1,5 @@
 import { supabase } from './supabaseClient.js';
-import { renderScorecardInElement } from './scorecard.js?v3';
+import { renderScorecardInElement } from './scorecard.js?v4';
 
 
 // =============================
