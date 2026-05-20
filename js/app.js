@@ -131,7 +131,7 @@ async function syncFiltersAndInit() {
   currentTournamentId = tournamentSelect.value || null;
   setTournamentTitleFromSelect(tournamentSelect);
 
-  setOrganizationName(organizationData[0].name;);
+  setOrganizationName(organizationData[0].name);
   
   document.getElementById("category").value = "";
   await loadCategoriesByTournament(currentTournamentId);
