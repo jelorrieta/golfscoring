@@ -50,8 +50,9 @@ function getPosField(sortBy) {
 // =============================
 
 async function loadInitialData() {
-  const organizationId = '802306f0-4688-40f6-8eb1-927106d0f846';
-  
+  const hostname = window.location.hostname;
+  const { data } = await supabase.rpc('get_organization_by_hostname',{ p_hostname: hostname });
+  const organizationId = data[0].id;
   const { data: tournaments } = await supabase.rpc(
     'get_tournaments',
     { p_organization_id: organizationId }
