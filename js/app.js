@@ -67,6 +67,10 @@ async function loadInitialData() {
     return;
   }
   const organizationId = organizationData[0].id;
+  const theme = organization[0].theme;
+  const link = document.getElementById("theme-css");
+  
+  link.href = `/styles/themes/${theme}.css`;
   const { data: tournaments } = await supabase.rpc(
     'get_tournaments',
     { p_organization_id: organizationId }
