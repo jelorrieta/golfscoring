@@ -7,20 +7,19 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: var(--light);
   color: black;
-  background-image: url("../../images/fondo2.jpeg?v=2");
 }
 
 .container {
   background:
     linear-gradient(
       to right,
-      rgba(216,223,216,0.5),
+      rgb(184 220 184 / 50%),
       rgba(255,255,255,0.5)
   );
 }
 
 .top-row-form{
-  background: #777777;
+  background: rgb(3 62 22);
   border-left: rgb(200,200,200) solid 1px;
 }
 
@@ -29,15 +28,15 @@ body {
 }
 
 .top-sel option{
-  background:#777777;
+  background:#10c42c;
 }
 
 .row-form{
   background:
     linear-gradient(
       to bottom,
-      rgb(47 176 43),
-      #299e2c
+      rgb(21 100 15),
+      rgb(21 200 15)
   );
   border-left: rgb(200,200,200) solid 1px;
 }
@@ -62,8 +61,8 @@ body {
   background:
     linear-gradient(
       to right,
-      #1b702f,
-      #1ef352
+      #008820,
+      #00aa20
   );
 }
 
@@ -92,7 +91,7 @@ table{
 }
 
 th {
-  background: #444444;
+  background: rgb(0 90 0);
   color: white;
 }
 
@@ -109,7 +108,7 @@ tr:nth-child(odd) {
 }
 
 td{
-  color:rgb(4,4,80);
+  color:rgb(50 50 50);
   border-left: solid 1px #ddd;
 }  
 
@@ -118,7 +117,7 @@ td{
 }
 
 .player-cell{
-  color:rgb(5 27 3);
+  color:rgb(50 50 50);
 }
 
 .category{
