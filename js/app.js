@@ -488,7 +488,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadInitialData();
     bindCategoryFilter();
     bindLeaderboardEvents();
-    const tournamentSelect = document.getElementById("tournament");
     setTimeout(() => {
       syncFiltersAndInit();
     }, 0);
@@ -498,6 +497,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }, 300);
   }
   
+  const tournamentSelect = document.getElementById("tournament");
   tournamentSelect.addEventListener("change", () => {
     const tournamentId = tournamentSelect.value;
     const tournament = tournamentsCacheById[tournamentId];
