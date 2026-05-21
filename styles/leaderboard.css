@@ -2,7 +2,7 @@
 #splash {
   position: fixed;
   inset: 0;
-  background: white;
+  background: rgb(4 44 80);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,10 +12,9 @@
 
 /* texto */
 .splash-title {
-  font-size: 28px;
+  font-size: 38px;
   font-weight: 600;
-  color: #1a1a1a;
-  letter-spacing: 1px;
+  color: #f1f5f9;
 }
 
 /* estado oculto */
