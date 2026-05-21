@@ -21,7 +21,6 @@ let hostname = null;
 
 function getDefaultSortBy() {
   const tournament = tournamentsCacheById[currentTournamentId];
-  console.log(tournament);
   const formatName = tournament?.format_name;
   switch (formatName) {
     case 'stableford':
