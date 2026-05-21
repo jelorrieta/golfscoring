@@ -1,3 +1,29 @@
+/* Splash */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* texto */
+.splash-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: 1px;
+}
+
+/* estado oculto */
+#splash.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
 select{
   outline: none;
   box-shadow: none;

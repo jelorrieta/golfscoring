@@ -482,15 +482,22 @@ async function toggleScorecardRow(tr, { round_id, tournament_player_id, format }
 // =============================
 
 document.addEventListener("DOMContentLoaded", async () => {
-  
-  await loadInitialData();
-  bindCategoryFilter();
-  bindLeaderboardEvents();
-  const tournamentSelect = document.getElementById("tournament");
-  setTimeout(() => {
-    syncFiltersAndInit();
-  }, 0);
+  const splash = document.getElementById("splash");
 
+  try {
+    await loadInitialData();
+    bindCategoryFilter();
+    bindLeaderboardEvents();
+    const tournamentSelect = document.getElementById("tournament");
+    setTimeout(() => {
+      syncFiltersAndInit();
+    }, 0);
+  } finally {
+    setTimeout(() => {
+      splash.classList.add("hide");
+    }, 300);
+  }
+  
   tournamentSelect.addEventListener("change", () => {
     const tournamentId = tournamentSelect.value;
     const tournament = tournamentsCacheById[tournamentId];
