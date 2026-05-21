@@ -49,10 +49,6 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   min-height: 100vh;
-  background-size: cover;       /* llena toda la pantalla */
-  background-position: center;  /* centra la imagen */
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* efecto elegante tipo parallax */
 }
 
 .container {

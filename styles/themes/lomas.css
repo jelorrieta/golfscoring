@@ -9,6 +9,10 @@ body {
   background: var(--light);
   color: black;
   background-image: url("../../images/fondo2.jpeg?v=2");
+  background-size: cover;       /* llena toda la pantalla */
+  background-position: center;  /* centra la imagen */
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* efecto elegante tipo parallax */
 }
 
 .container {
