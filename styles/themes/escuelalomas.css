@@ -57,21 +57,21 @@ body {
 
 
 .header {
-  color:white;
+  color:#333333;
   background:
     linear-gradient(
       to right,
-      #008820,
-      #00aa20
+      #eeeeee,
+      #dddddd
   );
 }
 
 .titulo{
-  color: #ddd;
+  color: #bbbbbb;
 }
 
 .titulo2{
-    color: #ffffff;
+    color: #11aa11;
 }
 
 footer {
