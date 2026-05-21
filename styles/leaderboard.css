@@ -17,6 +17,13 @@
   color: #f1f5f9;
 }
 
+.splash-brand{
+  font-size: 24px;
+  font-weight: 600;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #f1f5f9;
+}
+
 /* estado oculto */
 #splash.hide {
   opacity: 0;
