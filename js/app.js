@@ -1,5 +1,5 @@
 import { supabase } from './supabaseClient.js';
-import { renderScorecardInElement } from './scorecard.js?v7';
+import { renderScorecardInElement } from './scorecard.js?v8';
 
 
 // =============================
@@ -462,13 +462,11 @@ async function toggleScorecardRow(tr, { round_id, tournament_player_id, format }
   const container = document.createElement('div');
   container.style.display = 'none';
   wrapper.appendChild(container);
-  const tournament_id = document.getElementById("tournament")?.value;
   await renderScorecardInElement({
     container,
     round_id,
     tournament_player_id,
     format,
-    tournament_id
   });
 
   wrapper.innerHTML = '';

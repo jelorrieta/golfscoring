@@ -50,7 +50,6 @@ export async function renderScorecardInElement({
   round_id,
   tournament_player_id,
   format,
-  tournament_id
 }) {
 
   // ==========================
@@ -153,11 +152,16 @@ export async function renderScorecardInElement({
 
   function sumRowLocal(prefix) {
 
-    const ranges = {
-      out: [1, 9],
-      in: [10, 18],
-      total: [1, 18]
-    };
+    const ranges =
+      format === "menores"
+      ? {
+        total: [1, 9]
+      }
+      : {
+        out: [1, 9],
+        in: [10, 18],
+        total: [1, 18]
+      };
 
     Object.entries(ranges).forEach(([key, [start, end]]) => {
       let sum = 0;
@@ -316,44 +320,72 @@ export async function renderScorecardInElement({
 // CONFIG COLUMNAS
 // ==============================
 
-function getColumnsConfig() {
+function getColumnsConfig(format) {
 
   const cols = [];
 
-  for (let i = 1; i <= 21; i++) {
+  // =========================
+  // HOYOS 1-9
+  // =========================
 
-    if (i === 10) {
+  for (let i = 1; i <= 9; i++) {
 
-      cols.push({
-        type: "out",
-        label: "1aVta"
-      });
-
-    } else if (i === 20) {
-
-      cols.push({
-        type: "in",
-        label: "2daVta"
-      });
-
-    } else if (i === 21) {
-
-      cols.push({
-        type: "total",
-        label: "Total"
-      });
-
-    } else {
-
-      const hole = i < 10 ? i : i - 1;
-
-      cols.push({
-        type: "hole",
-        hole,
-        label: hole.toString()
-      });
-    }
+    cols.push({
+      type: "hole",
+      hole: i,
+      label: i.toString()
+    });
   }
+
+  // =========================
+  // FORMATOS MENORES
+  // =========================
+
+  if (format === "menores") {
+
+    cols.push({
+      type: "total",
+      label: "Total"
+    });
+
+    return cols;
+  }
+
+  // =========================
+  // VUELTA 1
+  // =========================
+
+  cols.push({
+    type: "out",
+    label: "1aVta"
+  });
+
+  // =========================
+  // HOYOS 10-18
+  // =========================
+
+  for (let i = 10; i <= 18; i++) {
+
+    cols.push({
+      type: "hole",
+      hole: i,
+      label: i.toString()
+    });
+  }
+
+  // =========================
+  // VUELTA 2 + TOTAL
+  // =========================
+
+  cols.push({
+    type: "in",
+    label: "2daVta"
+  });
+
+  cols.push({
+    type: "total",
+    label: "Total"
+  });
 
   return cols;
 }
