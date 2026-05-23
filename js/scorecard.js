@@ -214,21 +214,12 @@ export async function renderScorecardInElement({
       "double-bogey",
       "triple-bogey"
     );
-
-    if (diff <= -2 && score > 0) {
-      scoreEl.classList.add("eagle");
-
-    } else if (diff === -1) {
-      scoreEl.classList.add("birdie");
-
-    } else if (diff === 1) {
-      scoreEl.classList.add("bogey");
-
-    } else if (diff === 2) {
-      scoreEl.classList.add("double-bogey");
-
-    } else if (diff >= 3) {
-      scoreEl.classList.add("triple-bogey");
+    if (format != "menores") {
+      if (diff <= -2 && score > 0) {scoreEl.classList.add("eagle");}
+      else if (diff === -1) {scoreEl.classList.add("birdie");}
+      else if (diff === 1) {scoreEl.classList.add("bogey");} 
+      else if (diff === 2) {scoreEl.classList.add("double-bogey");}
+      else if (diff >= 3) {scoreEl.classList.add("triple-bogey");}
     }
 
     // ======================
