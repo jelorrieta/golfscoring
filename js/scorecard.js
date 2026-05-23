@@ -59,7 +59,7 @@ export async function renderScorecardInElement({
   container.innerHTML = "";
   const table = createTable();
   container.appendChild(table);
-  const columns = getColumnsConfig();
+  const columns = getColumnsConfig(format);
   table.appendChild(createRow("Hoyo", columns, renderHoleHeader));
   table.appendChild(createRow("Ventaja", columns, renderHandicapHeader));
   const parRow = createRow("Par", columns, renderParCell);
