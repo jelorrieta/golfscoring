@@ -144,14 +144,15 @@ h2 {
 }
 
 .sel{
-  width: 90vw;
+  width: 80vw;
   border:none;
   background: transparent;
   font-size:16px;
   font-weight:600;
   text-transform:uppercase;
   border-radius:2px;
-  text-align:center;
+  text-align:left;
+  text-indent:30%;
   padding: 1px;
 }
 
