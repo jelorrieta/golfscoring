@@ -120,6 +120,7 @@ h2 {
   z-index:10;
   top:164px;
   height:22px;
+  justify-content:space-between;
 }
 
 [hidden] {
@@ -133,17 +134,17 @@ h2 {
 }
 
 .etiq {
-  font-size: 12px;
+  font-size: 10px;
   font-weight:600;
   text-transform:uppercase;
   padding: 0px 10px;
   transform-origin: left;
   margin-right: -5em;
-  width: 8vw;
+  width: 10vw;
 }
 
 .sel{
-  width: 92vw;
+  width: 90vw;
   border:none;
   background: transparent;
   font-size:16px;
@@ -153,7 +154,6 @@ h2 {
   text-align:center;
   padding: 1px;
 }
-
 
 .players-table {
   display: flex;
