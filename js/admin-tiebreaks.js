@@ -71,6 +71,7 @@ async function loadLeaderboard(tournamentId) {
       p_tournament_id: tournamentId
     }
   );
+  console.log(data);
 
   if (error) {
     console.error(error);
