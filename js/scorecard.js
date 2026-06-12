@@ -66,7 +66,7 @@ export async function renderScorecardInElement({
   table.appendChild(parRow);
   table.appendChild(createRow("Golpes Totales", columns, renderScoreCell));
 
-  if (format !== "stableford" && format !== "menores") {
+  if (format !== "stableford" && format !== "menores" && format !== "dobles_bestball") {
     table.appendChild(createRow("Neto", columns, renderNetCell));
   }
 
