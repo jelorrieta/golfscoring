@@ -178,17 +178,12 @@ async function loadTable() {
   // =============================
 
   const holesMap = new Map();
-
   const scorecardsMap = new Map();
-
   const holeScores = [];
 
   for (const row of data) {
-
     // holes
-
     if (!holesMap.has(row.hole_id)) {
-
       holesMap.set(row.hole_id, {
         id: row.hole_id,
         hole_number: row.hole_number
@@ -196,16 +191,22 @@ async function loadTable() {
     }
 
     // scorecards
-
     if (!scorecardsMap.has(row.scorecard_id)) {
+      
+      const hasGuest =
+        row.guest_name !== null &&
+        row.guest_name !== undefined &&
+        row.guest_name.toString().trim() !== "";
+
+      const playerName = hasGuest
+        ? `${row.player_name} - ${row.guest_name}`
+        : row.player_name;
 
       scorecardsMap.set(row.scorecard_id, {
-
         id: row.scorecard_id,
-
         tp: {
           players: {
-            name: row.player_name
+            name: playerName
           }
         }
       });
@@ -214,13 +215,9 @@ async function loadTable() {
     // scores
 
     if (row.strokes !== null) {
-
       holeScores.push({
-
         scorecard_id: row.scorecard_id,
-
         hole_id: row.hole_id,
-
         strokes: row.strokes
       });
     }
