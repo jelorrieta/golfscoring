@@ -139,7 +139,7 @@ export async function renderScorecardInElement({
     if (el4) el4.textContent = s.stableford_points;
     if (el5) el5.textContent = (s.strokes - s.par);
 
-    if (received) {
+    if (received && received>0) {
       received.textContent =
         "•".repeat(s.strokes_received || 0);
     }
