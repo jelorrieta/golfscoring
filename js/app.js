@@ -279,7 +279,7 @@ function buildLeaderboardTable(data, { sortBy }) {
   const rowsHtml = data.map((row, index) => {
     let name = row.player_name;
     
-    if (formatName === 'scramble' || formatName === 'dobles_bestball') {
+    if (formatName === 'scramble' || formatName === 'gross') {
       name =
       ` <div class="player">${row.player_name}</div>
         <div class="guest">${row.guest}</div>`;
