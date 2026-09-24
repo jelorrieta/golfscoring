@@ -6,7 +6,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: var(--light);
-  color: black;
+  color: rgb(0 0 45);
 }
 
 .container {
@@ -19,7 +19,7 @@ body {
 }
 
 .top-row-form{
-  background: rgb(0 79 127);
+  background: #002168;
   border-left: rgb(200,200,200) solid 1px;
 }
 
@@ -39,6 +39,7 @@ body {
       #C8D2DD
   );
   border-left: rgb(200,200,200) solid 1px;
+  display: none;
 }
 
 
@@ -61,17 +62,26 @@ body {
   background:
     linear-gradient(
       to right,
-      #eeeeee,
-      #dddddd
+      #004F7F,
+      #0a4b72
   );
 }
 
 .titulo{
-  color: #002168;
+  color: #ffffff;
 }
 
 .titulo2{
-    color: #212338;
+    color: #ffffff;
+}
+
+.bajada{
+  color: #ffffff;
+  font-size:24px
+}
+
+.dashboard-title{
+  background:rgb(1 1 107) !important;
 }
 
 footer {
@@ -93,6 +103,7 @@ table{
 th {
   background: rgb(0 56 130);
   color: white;
+  top: 164px;
 }
 
 tr {
@@ -100,11 +111,11 @@ tr {
 }
 
 tr:nth-child(even) {
-  background-color: rgba(213, 214, 221, 0.8); /* verde grisaceo */
+  background-color: #E2E7F2;
 }
 
 tr:nth-child(odd) {
-  background-color: rgba(255,255,255,0.8); /* blanco */
+  background-color: #E9EDF3;
 }
 
 td{
@@ -117,7 +128,7 @@ td{
 }
 
 .player-cell{
-  color:rgb(50 50 50);
+  color:rgb(4 4 79);
 }
 
 .category{
