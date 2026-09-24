@@ -19,7 +19,7 @@ body {
 }
 
 .top-row-form{
-  background: rgb(3 62 22);
+  background: rgb(0 79 127);
   border-left: rgb(200,200,200) solid 1px;
 }
 
@@ -28,15 +28,15 @@ body {
 }
 
 .top-sel option{
-  background:#10c42c;
+  background:#C8D2DD;
 }
 
 .row-form{
   background:
     linear-gradient(
       to bottom,
-      rgb(21 100 15),
-      rgb(21 200 15)
+      rgb(0 79 127),
+      #C8D2DD
   );
   border-left: rgb(200,200,200) solid 1px;
 }
@@ -67,7 +67,7 @@ body {
 }
 
 .titulo{
-  color: #115511;
+  color: #2f1d92;
 }
 
 .titulo2{
@@ -91,7 +91,7 @@ table{
 }
 
 th {
-  background: rgb(0 90 0);
+  background: rgb(0 56 130);
   color: white;
 }
 
@@ -121,7 +121,7 @@ td{
 }
 
 .category{
-  color: rgb(3 118 41);
+  color: rgb(0 56 130);
 }
 
 .columna_orden{
@@ -130,7 +130,7 @@ td{
 }
 
 .columna_orden_d{
-  background-color: #3e8f3f;
+  background-color: rgb(0 56 130);
   color: white;
 }
 
