@@ -73,7 +73,7 @@ async function loadInitialData() {
   
   const icon = organizationData[0].icon;
   const favicon = document.getElementById("fav-icon");
-  if (organizationIcon != null){
+  if (icon != null){
     favicon.href =  `${icon}-favicon.png`;
   }
   
