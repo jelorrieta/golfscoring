@@ -13,7 +13,7 @@ body {
   background:
     linear-gradient(
       to right,
-      rgb(184 220 184 / 50%),
+      rgba(184, 198, 220, 0.5),
       rgba(255,255,255,0.5)
   );
 }
@@ -100,7 +100,7 @@ tr {
 }
 
 tr:nth-child(even) {
-  background-color: rgb(213 221 216 / 80%); /* verde grisaceo */
+  background-color: rgba(213, 214, 221, 0.8); /* verde grisaceo */
 }
 
 tr:nth-child(odd) {
