@@ -50,15 +50,15 @@
     <script type="module" src="js/dashboard.js?v=20"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-      const leaderboard = document.getElementById('leaderboard');
-      function autoScroll() {
-        leaderboard.scrollTop += 1;
-        if (leaderboard.scrollTop >= 
-            leaderboard.scrollHeight - leaderboard.clientHeight) {
-          leaderboard.scrollTop = 0;
-        }
+    function autoScroll() {
+      window.scrollBy(0, 1);
+  
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+        window.scrollTo(0, 0);
       }
-      setInterval(autoScroll, 30);
-    </script>
+    }
+  
+    setInterval(autoScroll, 30);
+  </script>
   
 </body>
