@@ -50,25 +50,25 @@
     <script type="module" src="js/dashboard.js?v=20"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-    function iniciarScroll() {
-      // Pausa 3 segundos en el tope
-      setTimeout(() => {
-        const intervalo = setInterval(() => {
-          window.scrollBy(0, 1);
-  
-          // Al llegar al final, volver inmediatamente al tope
-          if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
-            clearInterval(intervalo);
-            window.scrollTo(0, 0);
-  
-            // Reiniciar el ciclo
-            iniciarScroll();
-          }
-        }, 30);
-      }, 3000);
-    }
-  
-    iniciarScroll();
-  </script>
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('autoscroll') === 'on') {
+        function iniciarScroll() {
+          // Pausa 3 segundos en el tope
+          setTimeout(() => {
+            const intervalo = setInterval(() => {
+              window.scrollBy(0, 1);
+              // Al llegar al final, volver inmediatamente al tope
+              if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+                clearInterval(intervalo);
+                window.scrollTo(0, 0);
+                // Reiniciar el ciclo
+                iniciarScroll();
+              }
+            }, 30);
+          }, 3000);
+        }
+        iniciarScroll();
+      }
+    </script>
   
 </body>
