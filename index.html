@@ -49,5 +49,16 @@
     <script type="module" src="js/app.js?v=59"></script>
     <script type="module" src="js/dashboard.js?v=20"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const leaderboard = document.getElementById('leaderboard');
+      function autoScroll() {
+        leaderboard.scrollTop += 1;
+        if (leaderboard.scrollTop >= 
+            leaderboard.scrollHeight - leaderboard.clientHeight) {
+          leaderboard.scrollTop = 0;
+        }
+      }
+      setInterval(autoScroll, 30);
+    </script>
   
 </body>
